@@ -1,0 +1,174 @@
+﻿@model SusOnTrack.Models.PacienteCadastroModel
+@using System.Collections.Generic
+@{
+    Layout = "~/Views/Shared/_LayoutPaciente.cshtml";
+    ViewBag.Title = "Cadastro de Pacientes";
+}
+@section styles{
+
+    @Styles.Render("~/Content/css")
+
+}
+@section scripts{
+
+    @Scripts.Render("~/bundles/jsPopular")
+
+}
+
+@using (Html.BeginRouteForm("", FormMethod.Post, htmlAttributes: new { @class = "Form", @id = "iForm" }))
+{
+    <header class="row justify-content-center">
+        <h1>@ViewBag.Title</h1>
+    </header>
+
+    <section class="container">
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+
+                    @Html.HiddenFor(mod => mod.Id, new { @id = "iId" })
+                </div>
+            </div>
+        </div>
+
+        @*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*@
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(mod => mod.DataNascimento, "Data de Nascimento:", new { @for = "iDataNascimento" })
+                    @Html.TextBoxFor(mod => mod.DataNascimento, new { @id = "iDataNascimento", @class = "form-control", @type = "date", @autocomplete = "off" })
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(mod => mod.Nome, "Nome:", new { @for = "iNome" })
+                    @Html.TextBoxFor(mod => mod.Nome, new { @id = "iNome", @class = "form-control", @autocomplete = "off", @*@pattern = "[a-zA-Z]+{1,50}/g"*@ })
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+
+                    @Html.LabelFor(mod => mod.NumeroSUS, "Numero CNS (SUS):", new { @for = "iNumeroSUS" })
+                    @Html.TextBoxFor(mod => mod.NumeroSUS,
+                   new
+                   {
+                       @id = "iNumeroSUS",
+                       @type = "text",
+                       @class = "form-control",
+                       @autocomplete = "off",
+                       @placeholder = "000.0000.0000.0000",
+                       //@pattern = ".{15,18}/g",
+                       @title = "Numero do CNS separado por pontos",
+                       @maxlength = "15"
+                   })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <input id="" type="submit" class="form-control ml-3" value="Cadastrar">
+        </div>
+
+    </section>
+}
+
+@section Local_Js{
+    <script type="module">
+        let module = await import("https://localhost:44352/SUS/Scripts/teste.js")
+            .then(variables => {
+
+                window.URLPORTAL = variables["URLPORTAL"];
+                return variables["URLPORTAL"];
+
+            });
+    </script>
+
+    <script type="text/javascript">
+        const doc = document,
+            Exemplo = doc.querySelector("#idExample"),
+            URLPORTAL = window.URLPORTAL,
+            Select = doc.querySelector("#idSelect"),
+            CampoSUS_CNS = doc.querySelector("#iNumeroSUS"),
+            botaoform = doc.querySelector("#iCadastrar"),
+            form = doc.querySelector("#iForm");
+
+        //botaoform.addEventListener("click",
+        //    (event) => {
+        //        form.submit();
+        //    });
+
+        CampoSUS_CNS.addEventListener("keyup",
+            /**
+             *
+             * @@param event
+             */
+            (event) => {
+                let regexSus = /(\d{3})(\d{4})(\d{4})(\d{3})(?=\d)/g,
+                    regexonlyNumber = /[a-zA-z]/g,
+                    stringvalue = event.currentTarget.value,                   
+                    finalString = (stringvalue.replace(regexonlyNumber, "")).replace(regexSus, '$1.$2.$3.$4');
+                event.currentTarget.value = finalString;
+            });
+
+
+        //async function GetAll() {
+        //    await $.post({ url: `${window.URLPORTAL}/api/PacienteApi/GetAll` })
+        //        .done(data => {
+        //            let example = doc.querySelector("#iExample");
+        //            example.textContent = "Consulta bem sucedida";
+        //            data.objeto.forEach(p => {
+        //                let obj = JSON.stringify(p);
+        //                example.textContent += `\n${obj}`;
+        //                console.log(obj);
+        //            });
+        //        })
+        //        .fail(data => {
+        //        });
+        //}
+        //async function Gravar() {
+        //    await $.post({
+        //        url: `${window.URLPORTAL}/api/PacienteApi/Gravar`,
+        //        data: {
+        //            Id: 2,
+        //            Nome: "Anderson",
+        //            NumeroSUS: '0123485',
+        //            DataNascimento: '12/01/1986'
+        //        }
+        //    })
+        //        .done(data => {
+        //            let example = doc.querySelector("#iExample");
+        //            example.textContent = "Registro gravado com sucesso";
+        //            data.objeto.forEach(p => {
+        //                let obj = JSON.stringify(p);
+        //                example.textContent += `\n${obj}`;
+        //                console.log(obj);
+        //            });
+        //        })
+        //        .fail(data => {
+        //        });
+        //}
+
+        //async function Excluir(id) {
+        //    await $.get({
+        //        url: `${window.URLPORTAL}/api/PacienteApi/Excluir?Id=${id}`,
+        //    })
+        //        .done(data => {
+        //            let example = doc.querySelector("#iExample");
+        //            example.textContent = "Registro deletado com sucesso";
+        //            data.objeto.forEach(p => {
+        //                let obj = JSON.stringify(p);
+        //                example.textContent += `\n${obj}`;
+        //                console.log(obj);
+        //            });
+        //        })
+        //        .fail(data => {
+        //        });
+        //}
+
+
+    </script>
+}
+
+

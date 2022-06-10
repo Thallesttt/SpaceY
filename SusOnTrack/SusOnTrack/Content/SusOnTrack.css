@@ -1,0 +1,21 @@
+﻿:root {
+    --number_columnsGrid: auto;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+.container {
+}
+
+.grid {
+    display: grid;
+    grid-template-rows: var(--number_columnsGrid);
+}
+
+.grid_Item {
+    display: grid;
+    grid-template-columns: auto;
+}

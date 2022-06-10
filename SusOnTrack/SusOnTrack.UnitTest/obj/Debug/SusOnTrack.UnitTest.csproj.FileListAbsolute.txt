@@ -1,0 +1,2 @@
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.UnitTest\obj\Debug\SusOnTrack.UnitTest.csprojAssemblyReference.cache
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.UnitTest\obj\Debug\SusOnTrack.UnitTest.csproj.CoreCompileInputs.cache

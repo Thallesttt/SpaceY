@@ -1,0 +1,160 @@
+﻿@model SusOnTrack.Models.VacinaCadastroModel
+@using System.Collections.Generic
+@{
+    Layout = "~/Views/Shared/_LayoutPaciente.cshtml";
+    ViewBag.Title = "Cadastro de Vacinas";
+}
+@section styles{
+
+    @Styles.Render("~/Content/css")
+
+}
+@section scripts{
+
+    @Scripts.Render("~/bundles/jsPopular")
+
+}
+
+@using (Html.BeginRouteForm("", FormMethod.Post, htmlAttributes: new { @class = "Form", @id = "iForm" }))
+{
+    <header class="row justify-content-center">
+        <h1>@ViewBag.Title</h1>
+    </header>
+
+    <section class="container">
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+
+                    @Html.HiddenFor(mod => mod.Id, new { @id = "iId" })
+                </div>
+            </div>
+        </div>
+
+        @*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*@
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(mod => mod.Codigo, "Código da Vacina:", new { @for = "iCodigo" })
+                    @Html.TextBoxFor(mod => mod.Codigo, new { @id = "iCodigo", @class = "form-control", @autocomplete = "off", @title = "Código da Vacina" })
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(mod => mod.Conteudo, "Conteúdo da Vacina:", new { @for = "iConteudo" })
+                    @Html.TextBoxFor(mod => mod.Conteudo, new
+               {
+                   @id = "iConteudo",
+                        @class = "form-control",
+                   @type = "number",
+                        @placeholder = "(ML)",
+                   @autocomplete = "off",
+                        @title = "Conteúdo da Vacina em ml",
+                   @min = "1"
+               })
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+
+                    @Html.LabelFor(mod => mod.Valor, "Valor da Vacina:", new { @for = "iValor" })
+                    @Html.TextBoxFor(mod => mod.Valor, new
+                    {
+                        @id = "iValor",
+                        @type = "text",
+                        @class = "form-control",
+                        @autocomplete = "off",
+                        @placeholder = "R$00,00",/*@pattern = ".{15,18}/g", */
+                        @title = "Valor da vacina em Reais(Brl)"
+                   })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-4">
+                @Html.LabelFor(mod => mod.Tipo, "Tipo de Vacina:", new { @for = "iTipo" })
+                @Html.EnumDropDownListFor(mod => mod.Tipo, new { @id = "iTipo", @class = "form-control" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(mod => mod.Tipo, "Selecione o Posto a ser vinculado:", new { @for = "iPostoVinculado"})
+                @Html.DropDownListFor(mod => mod.Id_PostoVinculado, new List<SelectListItem>(), "Selecione",new { @id = "iPostoVinculado", @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <input id="" type="submit" class="form-control ml-3" value="Cadastrar">
+        </div>
+
+    </section>
+}
+
+@section Local_Js{
+    <script type="module">
+        let module = await import("https://localhost:44352/SUS/Scripts/teste.js")
+            .then(variables => {
+
+                window.URLPORTAL = variables["URLPORTAL"];
+                return variables["URLPORTAL"];
+
+            });
+    </script>
+
+    <script type="text/javascript">
+        const doc = document,
+            Exemplo = doc.querySelector("#idExample"),
+            URLPORTAL = window.URLPORTAL,
+            postoCombo = doc.querySelector("#iPostoVinculado"),
+            valorVacina = doc.querySelector("#iValor"),
+            form = doc.querySelector("#iForm");
+
+        valorVacina.addEventListener("focusout", () => {
+            let bruteString = event.currentTarget.value;
+            let realvalue = bruteString;
+            if (bruteString.search(/[,00]/g) == -1) {
+                realvalue = `${bruteString},00`
+            }
+
+            event.currentTarget.value = realvalue;
+
+        });
+
+        valorVacina.addEventListener("keyup", () => {
+            let bruteString = event.currentTarget.value,
+                numericvalue = bruteString.replace(/[a-zA-Z]/g, "");
+            event.currentTarget.value = `${numericvalue}`;
+        });
+        async function GetComboPosto()
+        {
+            try { }
+            catch (erro) { }
+            $.post({ url: "https://localhost:44352/SUS/api/PostoApi/OptionComboPosto" })
+                .done(
+                    (data = {}) => {
+                        const Keys = Object.keys(data),
+                            Values = Object.values(data);                            
+
+                        for (let iterator = 0; iterator < Keys.length; iterator++) {
+
+                            let option = doc.createElement("option");
+                            
+                            option.text = `${Keys[iterator]}: ${Values[iterator]}`;
+                            option.value = `${Keys[iterator]}`;
+                            
+                            postoCombo.appendChild(option);
+                        }
+                    
+            })
+                .fail((data = {}) => {
+                });
+
+        }
+
+
+    </script>
+}
+
+

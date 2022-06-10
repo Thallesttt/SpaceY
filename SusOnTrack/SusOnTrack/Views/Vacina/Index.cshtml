@@ -1,0 +1,169 @@
+﻿@model SusOnTrack.Models.VacinaListagemModel
+@using System.Collections.Generic
+@{
+    Layout = "~/Views/Shared/_LayoutPaciente.cshtml";
+    ViewBag.Title = "Listagem de Vacinas";
+}
+@section styles{
+
+    @Styles.Render("~/Content/css")
+
+}
+@section scripts{
+
+    @Scripts.Render("~/bundles/jsPopular")
+
+}
+
+@Html.HiddenFor(Model => Model.IdPesquisa, new { @id = "id" })
+<div>
+    @* Title Here *@
+
+    <header class="row justify-content-center">
+        <h1>@ViewBag.Title</h1>
+    </header>
+    @* Content Here
+        Ideias de Conteúdo:
+        1:Número de Pacientes em fila de espera
+        2:Número de Vacinas disponíveis
+        3:Número de Postos na sua região( dentro de uma distancia específica)
+    *@
+    <section class="grid">
+        <div class="row">
+            <div class="col-md">
+                <div class="form-group">
+                    <label for="iExample"> Teste de Botão </label>
+                    <input class="form-control" type="button" value="Teste" id="idExample" />
+                </div>
+            </div>
+
+            @{
+                Dictionary<long, string> itens = new Dictionary<Int64, String>();
+                List<SelectListItem> select = new List<SelectListItem>();
+                itens.Add(1, "Solicitar nova remessa de vacinas para determinado posto");
+                itens.Add(2, "Número de Vacinas disponíveis nacionalmente");
+                itens.Add(3, "Descricão das Vacinas");
+
+                foreach (var item in itens)
+                {
+                    select.Add(new SelectListItem { Text = item.Value, Value = Convert.ToString(item.Key) });
+                }
+                //select[0].Selected = true;
+            }
+            <div class="col-md">
+                <div class="form-group">
+                    @Html.DropDownListFor(Model => Model.IdPesquisa, select, "Selecione", new { @Id = "idSelect", @class = "form-control select", @autocomplete = "off" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+
+                <input type="button" id="iCadastro" class="form-control" value="Cadastrar" />
+            </div>
+        </div>
+
+        <div class="row" id="iExample">
+
+        </div>
+    </section>
+
+</div>
+@section Local_Js{
+    <script type="module">
+        let module = await import("https://localhost:44352/SUS/Scripts/teste.js")
+            .then(variables => {
+
+                window.URLPORTAL = variables["URLPORTAL"];
+                return variables["URLPORTAL"];
+
+            });
+    </script>
+
+    <script type="text/javascript">
+        const doc = document,
+            Exemplo = doc.querySelector("#idExample"),
+            URLPORTAL = window.URLPORTAL,
+            Select = doc.querySelector("#idSelect"),
+            cadastro = doc.querySelector("#iCadastro");
+
+        cadastro.addEventListener("click", () => {
+            let destinoUrl = "@Url.Action("Cadastro","Vacina")";
+            window.location.href = destinoUrl;
+        });
+
+        Select.addEventListener("change",
+            /**
+             * evento para determinar option selecionada
+             * @@param event{number}
+             */
+            async function (event) {
+                let valorEscolhido = event.target.value,
+                    arrayDescriptions = event.target.textContent.split('\n').filter(p => { return p; }),
+                    item = arrayDescriptions[valorEscolhido];
+
+                if (item == undefined) {
+
+                    item = arrayDescriptions[0];
+
+                }
+
+                await requestFromValue(valorEscolhido);
+            });
+        async function GetAll() {
+            await $.post({ url: `${window.URLPORTAL}/api/PacienteApi/GetAll` })
+                .done(data => {
+                    let example = doc.querySelector("#iExample");
+                    example.textContent = "Consulta bem sucedida";
+                    data.objeto.forEach(p => {
+                        let obj = JSON.stringify(p);
+                        example.textContent += `\n${obj}`;
+                        console.log(obj);
+                    });
+                })
+                .fail(data => {
+                });
+        }
+        async function Gravar() {
+            await $.post({
+                url: `${window.URLPORTAL}/api/PacienteApi/Gravar`,
+                data: {
+                    Id: 2,
+                    Nome: "Anderson",
+                    NumeroSUS: '0123485',
+                    DataNascimento: '12/01/1986'
+                }
+            })
+                .done(data => {
+                    let example = doc.querySelector("#iExample");
+                    example.textContent = "Registro gravado com sucesso";
+                    data.objeto.forEach(p => {
+                        let obj = JSON.stringify(p);
+                        example.textContent += `\n${obj}`;
+                        console.log(obj);
+                    });
+                })
+                .fail(data => {
+                });
+        }
+
+        async function Excluir(id) {
+            await $.get({
+                url: `${window.URLPORTAL}/api/PacienteApi/Excluir?Id=${id}`,
+            })
+                .done(data => {
+                    let example = doc.querySelector("#iExample");
+                    example.textContent = "Registro deletado com sucesso";
+                    data.objeto.forEach(p => {
+                        let obj = JSON.stringify(p);
+                        example.textContent += `\n${obj}`;
+                        console.log(obj);
+                    });
+                })
+                .fail(data => {
+                });
+        }
+
+
+    </script>
+}

@@ -1,0 +1,17 @@
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\bin\Debug\SusOnTrack.Repository.dll
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\bin\Debug\SusOnTrack.Repository.pdb
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\bin\Debug\Antlr3.Runtime.dll
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\bin\Debug\Iesi.Collections.dll
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\bin\Debug\NHibernate.dll
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\bin\Debug\Remotion.Linq.dll
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\bin\Debug\Remotion.Linq.EagerFetching.dll
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\bin\Debug\Antlr3.Runtime.xml
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\bin\Debug\Iesi.Collections.xml
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\bin\Debug\NHibernate.xml
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\bin\Debug\Remotion.Linq.xml
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\bin\Debug\Remotion.Linq.EagerFetching.xml
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\obj\Debug\SusOnTrack.Repository.csprojAssemblyReference.cache
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\obj\Debug\SusOnTrack.Repository.csproj.CoreCompileInputs.cache
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\obj\Debug\SusOnTrack.Repository.csproj.CopyComplete
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\obj\Debug\SusOnTrack.Repository.dll
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Repository\obj\Debug\SusOnTrack.Repository.pdb

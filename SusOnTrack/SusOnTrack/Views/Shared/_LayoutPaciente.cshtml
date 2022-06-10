@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @RenderSection("styles")
+    @RenderSection("scripts")
+    <style>
+        body 
+        {
+            background-color: #77f8ef;
+        }
+    </style>
+
+</head>
+<body style="padding:1vw">
+    <div>
+        @RenderBody()
+        @RenderSection("Local_Js")
+    </div>
+</body>
+</html>

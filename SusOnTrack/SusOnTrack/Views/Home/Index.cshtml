@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@section Scripts
+    {
+
+    <script type="module">
+        import { URLPORTAL } from "https://localhost:44352/SUS/Scripts/teste.js";
+        document.addEventListener('DOMContentLoaded', function () {
+            let carousel = document.querySelector("#iCarouselRow");
+
+            $.ajax({ url: `${URLPORTAL}/api/HomeApi/Carousel`, type: "POST", })
+                .done(data => {
+                    if (data) {
+                        let text = `<canvas id="#i${data}"></>`;
+                        let document = document.querySelector("#canvas").getcontext('2d');
+                    }
+
+
+                });
+
+        });
+
+    </script>
+}
+@*<div class="jumbotron">
+    <h1>SUS_On_Track</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>*@
+
+<div class="row" id="iCarouselRow">
+
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Pacientes</h2>
+        <p>
+            Nesta área será possível visualizar todos os respectivos pacientes cadastrados no sistema sendo possível filtrar pelo posto que desejar
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Paciente")">Saiba Mais</a></p>
+
+    </div>
+    <div class="col-md-4">
+        <h2>Postos/Hospitais</h2>
+        <p>Nesta Área será possível visualizar os hospitais cadastrados no sistema. Será possível filtrar pela vacina disponível na unidade e pelo paciente. </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Posto")">Saiba Mais</a></p>
+
+    </div>
+    <div class="col-md-4">
+        <h2>Vacinas </h2>
+        <p>Nesta área será possível visualizar as vacinas disponíveis no sistema</p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Vacina")">Saiba Mais</a></p>
+
+    </div>
+</div>

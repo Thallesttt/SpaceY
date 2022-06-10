@@ -1,0 +1,6 @@
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Enumerado\bin\Debug\SusOnTrack.Enumerado.dll
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Enumerado\bin\Debug\SusOnTrack.Enumerado.pdb
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Enumerado\obj\Debug\SusOnTrack.Enumerado.csprojAssemblyReference.cache
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Enumerado\obj\Debug\SusOnTrack.Enumerado.csproj.CoreCompileInputs.cache
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Enumerado\obj\Debug\SusOnTrack.Enumerado.dll
+D:\Treinamento\SusOnTrack\SusOnTrack\SusOnTrack.Enumerado\obj\Debug\SusOnTrack.Enumerado.pdb
